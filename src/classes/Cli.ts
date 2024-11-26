@@ -399,7 +399,7 @@ class Cli {
           for (let i = 0; i < this.vehicles.length; i++){
             if (this.vehicles[i].vin === this.selectedVehicleVin && this.vehicles[i] instanceof Truck){
               truck = this.vehicles[i] as Truck;
-              // truck.tow(this.vehicles[i]);
+              truck.tow(this.vehicles[i]);
               this.findVehicleToTow(truck);
               return;
             }
