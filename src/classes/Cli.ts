@@ -332,7 +332,8 @@ class Cli {
             'Turn left',
             'Reverse',
             'Select or create another vehicle',
-            'Exit',
+            'Remove this vehicle',
+            'Exit'
           ],
         },
       ])
@@ -421,14 +422,26 @@ class Cli {
             // Checks to see if the vehicle is a motorbike
             if (this.vehicles[i].vin === this.selectedVehicleVin && this.vehicles[i] instanceof Motorbike){
               motorbike = this.vehicles[i] as Motorbike;
-             motorbike.wheelie();
             }
+          }
+          // If the selected vehicle is a motorbike, the wheelie method is called
+          if (motorbike){
+            motorbike.wheelie();
+          }
+          else{
+            console.log("This action is only available for Motorbikes");
           }
         }
         else if (answers.action === 'Select or create another vehicle') {
           // start the cli to return to the initial prompt if the user wants to select or create another vehicle
           this.startCli();
           return;
+        } else if (answers.action === 'Remove this vehicle'){
+          for (let i = 0; i < this.vehicles.length; i++){
+            if (this.vehicles[i].vin === this.selectedVehicleVin){
+              this.vehicles.splice(i, 1);
+            }
+          }
         } else {
           // exit the cli if the user selects exit
           this.exit = true;
